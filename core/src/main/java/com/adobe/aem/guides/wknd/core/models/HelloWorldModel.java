@@ -45,6 +45,8 @@ public class HelloWorldModel {
     private ResourceResolver resourceResolver;
 
     private String message;
+    @ValueMapValue
+    private String slingText;
 
     @PostConstruct
     protected void init() {
@@ -56,10 +58,16 @@ public class HelloWorldModel {
         message = "Hello World!\n"
             + "Resource type is: " + resourceType + "\n"
             + "Current page is:  " + currentPagePath + "\n";
+
+//        slingText = "slingText";
     }
 
     public String getMessage() {
         return message;
+    }
+
+    public String getSlingText() {
+        return slingText;
     }
 
 }

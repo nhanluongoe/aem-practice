@@ -31,15 +31,9 @@ public class SalientFeaturesModel {
 
   @ValueMapValue
   private String header;
-  // private List<DetailModel> detailModels = new ArrayList<>();
-
-  @Inject
-  private String slingText;
 
   @PostConstruct
   protected void init() {
-    header = "Tính năng nổi bật test";
-    slingText = "default sling text";
 
     // DetailModel description = new DetailModel();
     // description.setTitle("Mở tài khoản số đẹp nhanh chóng");
@@ -52,9 +46,6 @@ public class SalientFeaturesModel {
     return header;
   }
 
-  public String getSlingText() {
-    return slingText;
-  }
   // public List<DetailModel> getDetailModels() {
   // return detailModels;
   // }
