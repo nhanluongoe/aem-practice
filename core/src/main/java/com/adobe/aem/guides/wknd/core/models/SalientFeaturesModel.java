@@ -1,11 +1,15 @@
 package com.adobe.aem.guides.wknd.core.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jdk.nashorn.internal.objects.annotations.Getter;
+import lombok.Data;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.ChildResource;
 import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
@@ -19,6 +23,7 @@ import java.util.List;
 import static org.apache.sling.api.resource.ResourceResolver.PROPERTY_RESOURCE_TYPE;
 
 @Model(adaptables = { Resource.class }, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+@Data
 public class SalientFeaturesModel {
 
   @ValueMapValue(name = PROPERTY_RESOURCE_TYPE)
@@ -32,21 +37,21 @@ public class SalientFeaturesModel {
   @ValueMapValue
   private String header;
 
+  @ChildResource
+  private List<ListStep> listSteps;
+
   @PostConstruct
   protected void init() {
 
-    // DetailModel description = new DetailModel();
-    // description.setTitle("Mở tài khoản số đẹp nhanh chóng");
-    // description.setDescription("Mở tài khoản nhanh chóng chỉ vài phút hoàn toàn
-    // online, chọn số tài khoản đẹp như ý, hoàn toàn eKYC");
-    // detailModels.add(description);
   }
 
-  public String getHeader() {
-    return header;
-  }
-
-  // public List<DetailModel> getDetailModels() {
-  // return detailModels;
-  // }
+      @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+      public static class ListStep {
+        @Inject
+        private Boolean isExpand;
+        @Inject
+        private String title;
+        @Inject
+        private String description;
+      }
 }
